@@ -2,6 +2,7 @@
 
 ![alt tag](https://github.com/alexgomes09/SIRIWaveView/blob/master/captures/screen_capture.gif)
 
+## Usage
 ```
 <com.alex.siriwaveview.SiriWaveView
         android:id="@+id/siriWaveView"
