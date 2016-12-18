@@ -7,20 +7,21 @@
     android:background="@android:color/black"
     tools:context="com.alex.test.MainActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image"/>
-
     <com.alex.siriwaveview.SiriWaveView
         android:id="@+id/siriWaveView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:waveAmount="4"
         app:waveColor="@android:color/white"
         app:waveFrequency="2.0"
-        app:waveHeight="40dp"
-        app:waveAmount="4"
-        app:waveVerticalPosition="2"
-        app:waveInitialPhaseOffset="4"
-        app:wavePhaseShift="-0.11" />
+        app:waveHeight="50dp"
+        app:waveInitialPhaseOffset="0"
+        app:wavePhaseShift="-0.05"
+        app:waveVerticalPosition="2" />
+
+    <ToggleButton
+        android:id="@+id/button"
+        android:checked="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

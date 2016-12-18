@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 
 /**
  * Created by Alex on 6/25/2016.
@@ -18,18 +17,17 @@ public class SiriWaveView extends View {
     private Path mPath;
     private Paint mPaint;
 
-    float frequency = 1.5f;
-    float IdleAmplitude = 0.00f;
-    int waveNumber = 2;
-    float phaseShift = 0.15f;
-    float density = 10.0f;
-    float initialPhaseOffset = 0.0f;
-    float waveHeight;
-    float waveVerticalPosition = 2;
-    int waveColor;
-    float phase;
-    float amplitude;
-    float level = 1.0f;
+    private float frequency = 1.5f;
+    private float IdleAmplitude = 0.00f;
+    private int waveNumber = 2;
+    private float phaseShift = 0.15f;
+    private float initialPhaseOffset = 0.0f;
+    private float waveHeight;
+    private float waveVerticalPosition = 2;
+    private int waveColor;
+    private float phase;
+    private float amplitude;
+    private float level = 1.0f;
 
     ObjectAnimator mAmplitudeAnimator;
 
@@ -65,52 +63,27 @@ public class SiriWaveView extends View {
         mPath = new Path();
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(3);
+        mPaint.setStrokeWidth(2);
         mPaint.setColor(waveColor);
 
         a.recycle();
-        setupAnimation();
+        initAnimation();
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        updatePath();
-        canvas.drawPath(mPath, mPaint);
-    }
-
-    @Override
-    public void setVisibility(int visibility) {
-        super.setVisibility(visibility);
-        startOrCancelAngleAnim();
-    }
-
-    private void setupAnimation() {
+    private void initAnimation() {
         if (mAmplitudeAnimator == null) {
             mAmplitudeAnimator = ObjectAnimator.ofFloat(this, "amplitude", 1f);
             mAmplitudeAnimator.setRepeatCount(ObjectAnimator.INFINITE);
-            mAmplitudeAnimator.setRepeatMode(ObjectAnimator.INFINITE);
-            mAmplitudeAnimator.setInterpolator(new LinearInterpolator());
         }
         if (!mAmplitudeAnimator.isRunning()) {
             mAmplitudeAnimator.start();
         }
     }
 
-    public void stopAnimation() {
-        if (mAmplitudeAnimator != null) {
-            mAmplitudeAnimator.cancel();
-        }
-    }
-
-    public void startAnimation() {
-        if (mAmplitudeAnimator != null) {
-            mAmplitudeAnimator.start();
-        }
-    }
-
-    private void setAmplitude(float amplitude) {
-        this.amplitude = amplitude;
-        invalidate();
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawPath(mPath, mPaint);
+        updatePath();
     }
 
     private void updatePath() {
@@ -132,7 +105,7 @@ public class SiriWaveView extends View {
 
             float multiplier = (float) Math.min(1.0, (progress / 3.0f * 2.0f) + (1.0f / 3.0f));
 
-            for (int x = 0; x < width + density; x += density) {
+            for (int x = 0; x < width; x++) {
                 float scaling = (float) (-Math.pow(1 / mid * (x - mid), 2) + 1);
 
                 float y = (float) (scaling * maxAmplitude * normedAmplitude * Math.sin(2 * Math.PI * (x / width) * frequency + phase + initialPhaseOffset) + halfHeight);
@@ -145,41 +118,38 @@ public class SiriWaveView extends View {
             }
         }
 
-        //mPath.lineTo(getWidth(), getHeight());
-        //mPath.lineTo(0, getHeight());
-
         //mPath.close();
     }
 
-    public void startOrCancelAngleAnim() {
-        if (isViewVisible()) {
-            startAnimation();
-        } else {
-            stopAnimation();
+    private void setAmplitude(float amplitude) {
+        this.amplitude = amplitude;
+        invalidate();
+    }
+
+    private float getAmplitude() {
+        return this.amplitude;
+    }
+
+    public void stopAnimation() {
+        if (mAmplitudeAnimator != null) {
+            mAmplitudeAnimator.removeAllListeners();
+            mAmplitudeAnimator.end();
+            mAmplitudeAnimator.cancel();
         }
     }
 
-    private boolean isViewVisible() {
-        return getVisibility() == VISIBLE && getAlpha() * 255 > 0;
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        startAnimation();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        stopAnimation();
+    public void startAnimation() {
+        if (mAmplitudeAnimator != null) {
+            mAmplitudeAnimator.start();
+        }
     }
 
     public void setWaveColor(int waveColor) {
         mPaint.setColor(waveColor);
         invalidate();
     }
-    public void setStrokeWidth(float strokeWidth){
+
+    public void setStrokeWidth(float strokeWidth) {
         mPaint.setStrokeWidth(strokeWidth);
         invalidate();
     }
