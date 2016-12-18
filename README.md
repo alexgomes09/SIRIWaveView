@@ -28,12 +28,13 @@
 - waveVerticalPosition = basically where you want to set your wave on the screen. 2 will center the wave vertically on the screen
      - try value from 1 to 4
 
-####public methods
+### public methods
 * stopAnimation
 * startAnimation
 * setWaveColor(int waveColor)
 * setStrokeWidth(float width)
 
+--
 
 Inspired by [SCSiriWaveformView](https://github.com/stefanceriu/SCSiriWaveformView). Thanks and much appreciation to your hard work. 
 
