@@ -20,7 +20,7 @@
 - waveAmount = number of waves
 - waveColor = color of the wave
 - waveFrequency = how frequent the waves are
-- waveHeight - maximum height of center wave)
+- waveHeight - maximum height of center wave
 - waveInitialPhaseOffset - if you would like to start wave in different position than default
 - wavePhaseShift = how fast wave would be shifting towards end. 
      - negative value will shift wave to the right
