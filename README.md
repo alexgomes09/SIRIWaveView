@@ -38,6 +38,12 @@
 
 Inspired by [SCSiriWaveformView](https://github.com/stefanceriu/SCSiriWaveformView). Thanks and much appreciation to your hard work. 
 
+## Third Party Bindings
+
+### React Native
+You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-siri-wave-view)
+
+
 ##License 
 Copyright (C) 2016 Alex Gomes
 
