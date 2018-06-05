@@ -38,7 +38,13 @@
 
 Inspired by [SCSiriWaveformView](https://github.com/stefanceriu/SCSiriWaveformView). Thanks and much appreciation to your hard work. 
 
-##License 
+## Third Party Bindings
+
+### React Native
+You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-siri-wave-view)
+
+
+## License 
 Copyright (C) 2016 Alex Gomes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
